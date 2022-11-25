@@ -141,13 +141,12 @@ fn main() {
         .unwrap()
         .split(",")
         .map(|str| str.parse::<u8>().unwrap());
+        
     let mut boards: Vec<Board> = input[1..]
         .to_owned()
         .iter()
         .map(|board| Board::new_from_str(board))
         .collect();
-
-    println!("{}", lots.clone().count());
 
     let mut points = 0;
 
@@ -156,9 +155,6 @@ fn main() {
             board.mark(lot);
         }
 
-        // if boards.iter().any(|board| board.bingo().is_some()) {
-        //     break;
-        // }
         match boards.iter().map(|board| board.bingo()).filter(|opt| opt.is_some()).next().or(None) {
             Some(x) => { points += x.unwrap() * lot as u32; break; },
             _ => ()
