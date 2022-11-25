@@ -75,10 +75,6 @@ impl Line {
         (self.0.x(), self.1.x(), Direction::X)
     }
 
-    pub fn is_straight(&self) -> bool {
-        self.x_is_straight() ^ self.y_is_straight()
-    }
-
     pub fn x_is_straight(&self) -> bool {
         self.0.x() == self.1.x()
     }
