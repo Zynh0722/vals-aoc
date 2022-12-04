@@ -9,14 +9,16 @@ fn main() {
         .collect::<Vec<String>>()
         .join("\n");
 
-    let elf_calories = input
+    let mut elf_calories: Vec<i32> = input
         .split("\n\n")
         .map(|group| group.split("\n"))
-        .map(|group| group.fold(0, |acc, value| acc + value.parse::<i32>().unwrap()));
-
-    let max_calories = elf_calories
-        .max_by_key(|v| *v)
-        .unwrap();
+        .map(|group| group.fold(0, |acc, value| acc + value.parse::<i32>().unwrap()))
+        .collect();
     
-    print!("{}", max_calories)
+    elf_calories.sort();
+
+    let elf_calories: Vec<&i32> = elf_calories.iter().rev().collect();
+    
+    println!("Answer 1: {}", &elf_calories[0]);
+    print!("Answer 2: {}", [&elf_calories[0], &elf_calories[1], &elf_calories[2]].iter().fold(0, |acc, val| acc + **val));
 }
