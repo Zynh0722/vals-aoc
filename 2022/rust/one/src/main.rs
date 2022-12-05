@@ -1,15 +1,10 @@
-use std::io::{self, BufRead};
+use std::io::{self, Read};
 
 fn main() {
-    let stdin = io::stdin();
-    let input = stdin
-        .lock()
-        .lines()
-        .map(|l| l.unwrap())
-        .collect::<Vec<String>>()
-        .join("\n");
+    let mut buf = String::new();
+    io::stdin().read_to_string(&mut buf).unwrap();
 
-    let mut elf_calories: Vec<i32> = input
+    let mut elf_calories: Vec<i32> = buf
         .split("\n\n")
         .map(|group| group.split("\n"))
         .map(|group| group.fold(0, |acc, value| acc + value.parse::<i32>().unwrap()))
